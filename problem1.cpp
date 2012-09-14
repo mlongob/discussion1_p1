@@ -48,8 +48,10 @@ void total(void *arg)
 	{
 		register int a;
 		a = tally;			/* Display this on the console => */ DISPLAY1();
+		ask_yield();
 		a = a + 1;			/* Display this on the console => */ DISPLAY2();
 		tally = a;			/* Display this on the console => */ DISPLAY3();
+		ask_yield();
 	}
 }
 
@@ -87,9 +89,9 @@ void parent(void *arg)
 
 int main()
 {
-	const int cpus = 3;
-	const bool sync = true;
-	const bool async = true;
+	const int cpus = 1;
+	const bool sync = false;
+	const bool async = false;
 	const int seed = time(NULL);
 	
 	boot_cpus(cpus, (thread_startfunc_t) parent, NULL, sync, async, seed);
